@@ -30,14 +30,12 @@ def getdeposithistory():
     return do_api("/account/getdeposithistory")
 
 def do_api(method):
-    nonce = binascii.hexlify(os.urandom(16))
+    nonce = binascii.hexlify(os.urandom(16)).decode("utf-8")
     uri = bittrex_api + "%s?apikey=%s&nonce=%s" % (method, bittrex_api_key, nonce)
     h = hmac.new(bittrex_api_secret.encode(), msg=uri.encode(), digestmod=hashlib.sha512)
     sig = h.hexdigest()
     headers = {'apisign': sig}
-    print(uri)
     result = requests.get(uri, headers=headers)
-    print(result)
     if result.status_code == 200:
     	return result.text
     return "%s" % result.status_code
