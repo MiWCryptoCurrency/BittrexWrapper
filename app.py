@@ -23,11 +23,11 @@ def getbalances():
 
 @app.route("/getmarketsummaries")
 def getmarketsummaries():
-    return do_api("/public/getmarketsummaries")
+    return do_api("public/getmarketsummaries")
 
 @app.route("/getdeposithistory")
 def getdeposithistory():
-    return do_api("/account/getdeposithistory")
+    return do_api("account/getdeposithistory")
 
 def do_api(method):
     nonce = binascii.hexlify(os.urandom(16)).decode("utf-8")
